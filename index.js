@@ -2,8 +2,6 @@ const express = require('express');
 const app = express();
 var unirest = require('unirest');
 
-const port = process.env.port || 3000;
-
 app.use(express.json());
 
 app.use(function (req, res, next) {
@@ -21,7 +19,7 @@ app.get('/', (req, res) => {
 app.post('/list/:email/:id', (req, res) => {
     console.log(req.params.id);
     res.send(req.params.email); 
-    var req = unirest('POST', 'https://markflush.com/secure/public/frontend/forms/'+ req.params.id+'/save?=')
+    var req = unirest('POST', 'https://markflush.com/secure/public/frontend/forms/'+ req.params.id +'/save?=')
     .headers({
         'Content-Type': 'application/json'
       })
@@ -37,6 +35,6 @@ app.post('/list/:email/:id', (req, res) => {
 })
 
 
-app.listen(port, () =>{
+app.listen(process.env.PORT || 3000, () =>{
     console.log('listening on http://localhost:3000')
 })
